@@ -1,0 +1,13 @@
+package com.shpach.studgroup;
+
+public class Student extends Human {
+	
+	private String className="";
+	private String adress="";
+	private Grade grade;
+	public static enum Grade{year_1,year_2,year_3, year_4,year_5}
+	
+	
+	
+
+}

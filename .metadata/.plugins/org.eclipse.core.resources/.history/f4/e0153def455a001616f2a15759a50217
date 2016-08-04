@@ -1,0 +1,46 @@
+package com.shpach.studgroup;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+import com.shpach.studgroup.ClassGroup.ClassFullExeption;
+import com.shpach.studgroup.ClassGroup.NullStudentExeption;
+import com.shpach.studgroup.ClassGroup.StudentAllreadyExistExeption;
+import com.shpach.studgroup.ClassGroup.WrongGradeExeption;
+
+public class Main {
+
+	public static void main(String[] args) {
+		ClassGroup class1 = new ClassGroup("java OOP", Student.Grade.year_1);
+		Student st1 = new Student("Ivanov Ivan", Human.Sex.mail, new GregorianCalendar(1990, Calendar.MAY, 22),
+				"Kyiv, Lenin str,1", Student.Grade.year_1);
+		Student st2 = new Student("Sidorov Ivan", Human.Sex.mail, new GregorianCalendar(1990, Calendar.MAY, 22),
+				"Kyiv, Lenin str,1", Student.Grade.year_1);
+		Student st3 = new Student("Astahov Ivan", Human.Sex.mail, new GregorianCalendar(1990, Calendar.MAY, 22),
+				"Kyiv, Lenin str,1", Student.Grade.year_1);
+		addStudentToClass(class1,st1);
+		addStudentToClass(class1,st2);
+		addStudentToClass(class1,st3);
+		
+		System.out.println(class1);
+	}
+	private static void addStudentToClass(ClassGroup classGroup, Student student){
+		try {
+			classGroup.addStudent(student);
+		} catch (ClassFullExeption e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NullStudentExeption e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (StudentAllreadyExistExeption e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (WrongGradeExeption e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+}

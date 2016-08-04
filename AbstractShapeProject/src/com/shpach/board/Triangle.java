@@ -55,7 +55,7 @@ public class Triangle extends Shape {
 		double a = Point.getLength(p1, p2);
 		double b = Point.getLength(p1, p3);
 		double c = Point.getLength(p2, p3);
-		double p = a + b + c;
+		double p = (a + b + c)/2;
 		return sqrt(p * (p - a) * (p - b) * (p - c));
 	}
 

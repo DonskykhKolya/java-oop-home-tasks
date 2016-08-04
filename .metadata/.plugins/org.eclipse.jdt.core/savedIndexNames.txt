@@ -1,24 +1,7 @@
 INDEX VERSION 1.129+D:\JAVA_WP\Eclipse\JAVA OOP hometasks\.metadata\.plugins\org.eclipse.jdt.core
-1559060713.index
-1656417267.index
 1926135341.index
 2267447035.index
-630857861.index
-2531666063.index
-3234117647.index
-3566541198.index
-3305426765.index
 1160887345.index
-483659826.index
-3897901669.index
-2324149168.index
-1225809654.index
-3752326370.index
-1753522414.index
-1571434179.index
+873986321.index
 3625066181.index
-3509523518.index
-2899712255.index
-2448071419.index
 286281480.index
-4203653800.index
