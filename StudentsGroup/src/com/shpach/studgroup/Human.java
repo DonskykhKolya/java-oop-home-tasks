@@ -3,8 +3,9 @@ package com.shpach.studgroup;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class Human {
+public class Human implements Comparable<Human>{
 	private String name;
+	private String surName;
 	private Sex sex;
 	private Calendar dateOfBirth = new GregorianCalendar();
 	private double weigth;
@@ -13,9 +14,10 @@ public class Human {
 		mail, femail
 	}
 
-	public Human(String name, Sex sex, Calendar dateOfBirth, double weigth, double heigth) {
+	public Human(String surName,String name, Sex sex, Calendar dateOfBirth, double weigth, double heigth) {
 		super();
 		this.name = name;
+		this.surName=surName;
 		this.sex = sex;
 		this.dateOfBirth = dateOfBirth;
 		this.weigth = weigth;
@@ -24,6 +26,15 @@ public class Human {
 
 	public Human() {
 		super();
+	}
+	
+
+	public String getSurName() {
+		return surName;
+	}
+
+	public void setSurName(String surName) {
+		this.surName = surName;
 	}
 
 	public String getName() {
@@ -87,8 +98,13 @@ public class Human {
 
 	@Override
 	public String toString() {
-		return "Human [name=" + name + ", sex=" + sex + ", dateOfBirth=" + dateOfBirth + ", age=" + this.getAge()
+		return "Human [surmane=" + surName + "name=" + name + ", sex=" + sex + ", dateOfBirth=" + dateOfBirth + ", age=" + this.getAge()
 				+ ", weigth=" + weigth + ", heigth=" + heigth + "]";
+	}
+
+	@Override
+	public int compareTo(Human o) {
+		return this.getSurName().compareTo(o.getSurName());
 	}
 
 }

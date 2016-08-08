@@ -3,7 +3,7 @@ package com.shpach.studgroup;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class Student extends Human {
+public class Student extends Human  {
 	
 	private String className="";
 	private String adress="";
@@ -13,8 +13,8 @@ public class Student extends Human {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Student(String name, Sex sex, Calendar dateOfBirth, String adress, Grade grade) {
-		super(name, sex, dateOfBirth, 0, 0);
+	public Student(String surName,String name,  Sex sex, Calendar dateOfBirth, String adress, Grade grade) {
+		super(surName,name, sex, dateOfBirth, 0, 0);
 		this.adress = adress;
 		this.grade = grade;
 	}
@@ -40,7 +40,7 @@ public class Student extends Human {
 	public String toString() {
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 		String formatted = format1.format(this.getDateOfBirth().getTime());
-		return "Student [name=" + this.getName() + ", sex=" + this.getSex() + ", dateOfBirth=" + formatted
+		return "Student [surname=" + this.getSurName() + ", name=" + this.getName() + ", sex=" + this.getSex() + ", dateOfBirth=" + formatted
 						+ ", age=" + this.getAge()+", className=" + className + ", adress=" + adress + ", grade=" + grade + "]";
 	}
 	
