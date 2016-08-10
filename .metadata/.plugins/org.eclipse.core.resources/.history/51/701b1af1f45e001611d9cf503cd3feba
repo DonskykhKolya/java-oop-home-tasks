@@ -1,0 +1,13 @@
+package com.shpach.studgroup;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import org.omg.CORBA_2_3.portable.OutputStream;
+
+public interface DataImportExport {
+	
+	 void Import(ClassGroup group1) throws IOException, Exception;
+	 void Export() throws IOException;
+	
+}

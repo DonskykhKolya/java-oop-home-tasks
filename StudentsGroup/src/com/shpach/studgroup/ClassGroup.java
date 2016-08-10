@@ -11,11 +11,12 @@ import javax.swing.JOptionPane;
 
 import com.shpach.studgroup.Student.Grade;
 
-public class ClassGroup implements VoenKom {
+public class ClassGroup implements VoenKom{
 	private String className = "";
 	private Student.Grade grade;
 	private Student[] students = new Student[0];
 	private static int maxStudents = 10;
+	
 
 	public ClassGroup(String className, Grade grade) {
 		super();
@@ -25,6 +26,10 @@ public class ClassGroup implements VoenKom {
 
 	public ClassGroup() {
 		super();
+	}
+
+	public Student[] getStudents() {
+		return students;
 	}
 
 	public String getClassName() {
@@ -39,6 +44,7 @@ public class ClassGroup implements VoenKom {
 		return grade;
 	}
 
+	
 	public static class ClassFullExeption extends Exception {
 
 		@Override
@@ -185,8 +191,6 @@ public class ClassGroup implements VoenKom {
 		sb.append("ClassGroup" + System.lineSeparator() + "className=" + className + System.lineSeparator() + "grade="
 				+ grade + System.lineSeparator());
 		sb.append("Students list:" + System.lineSeparator());
-		// String[] st = sortStudents();
-
 		for (int i = 0; i < this.students.length; i++) {
 			sb.append((i + 1) + ") ").append(this.students[i]).append(System.lineSeparator());
 		}
@@ -229,7 +233,7 @@ public class ClassGroup implements VoenKom {
 		for (;;) {
 			try {
 				surName = JOptionPane.showInputDialog("Input surname:");
-				//TODO: make testings on non letters symbols
+				// TODO: make testings on non letters symbols
 				break;
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, "wrong surname");
@@ -238,7 +242,7 @@ public class ClassGroup implements VoenKom {
 		for (;;) {
 			try {
 				name = JOptionPane.showInputDialog("Input name:");
-				//TODO: make testings on non letters symbols
+				// TODO: make testings on non letters symbols
 				break;
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, "wrong name");
@@ -249,7 +253,7 @@ public class ClassGroup implements VoenKom {
 				sex = Human.Sex.values()[Integer
 						.valueOf(JOptionPane.showInputDialog("Input sex (0)-mail (1) -femail:"))];
 				break;
-			} catch ( NumberFormatException  | ArrayIndexOutOfBoundsException e) {
+			} catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
 				JOptionPane.showMessageDialog(null, "wrong sex value");
 			}
 		}
@@ -259,14 +263,14 @@ public class ClassGroup implements VoenKom {
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 				cal.setTime(sdf.parse(JOptionPane.showInputDialog("Input date of birth (yyyy-MM-dd):")));
 				break;
-			} catch ( ParseException e) {
+			} catch (ParseException e) {
 				JOptionPane.showMessageDialog(null, "wrong date format");
 			}
 		}
 		for (;;) {
 			try {
 				addr = JOptionPane.showInputDialog("Input adress:");
-				//TODO: make testings on non adress symbols
+				// TODO: make testings on non adress symbols
 				break;
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, "wrong adress");
@@ -277,7 +281,7 @@ public class ClassGroup implements VoenKom {
 				grade = Student.Grade
 						.values()[Integer.valueOf(JOptionPane.showInputDialog("Input grade (from 1 to 5):")) - 1];
 				break;
-			} catch (NumberFormatException  | ArrayIndexOutOfBoundsException  e) {
+			} catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
 				JOptionPane.showMessageDialog(null, "wrong grade");
 			}
 		}

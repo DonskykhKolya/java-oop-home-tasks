@@ -1,0 +1,70 @@
+package com.shpach.studgroup;
+
+import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import org.omg.CORBA_2_3.portable.OutputStream;
+
+import com.shpach.studgroup.Human.Sex;
+import com.shpach.studgroup.Student.Grade;
+
+public class ClassGroupImportExportToFile implements DataImportExport {
+
+	public static void Export(ClassGroup group) throws FileNotFoundException, IOException {
+		try (FileWriter fr = new FileWriter("group.txt")) {
+			SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+			StringBuilder sb= new StringBuilder();
+			sb.append(group.getClassName()).append(";"+System.lineSeparator());
+			sb.append(group.getGrade()).append(";"+System.lineSeparator());
+			for (Student student : group.getStudents()) {
+				sb.append(student.getSurName() ).append(";");
+				sb.append(student.getName() ).append(";");
+				sb.append(student.getSex() ).append(";");
+				sb.append(format1.format(student.getDateOfBirth().getTime())).append(";");
+				sb.append(student.getAdress()).append(";");
+				sb.append(student.getGrade()).append(";");
+				sb.append(System.lineSeparator());
+			}
+			
+			
+			
+			
+			Class gr = group.getClass();
+			Field[] fields = gr.getDeclaredFields();
+			Constructor [] con=gr.getConstructors();
+			
+			for (Field field : fields) {
+			//	sb.append(field.getName()).append("=").append(field.toGenericString()).append(";").append(System.lineSeparator());
+			}
+			
+			fr.write(sb.toString());
+		}
+
+	}
+	
+	private static InputStream getFIS(ClassGroup groupe){
+		ByteArrayInputStream b= new ByteArrayInputStream(new byte[1]);
+		return b;
+		
+	}
+
+	private static void ImportStream(InputStream isFrom, FileOutputStream osTo) throws IOException {
+		try (InputStream isFrom1 = isFrom; FileOutputStream osTo1 = osTo) {
+			byte[] buff = new byte[4 * 1024];
+			int readBytes = 0;
+			for (; (readBytes = isFrom1.read(buff)) > 0;) {
+				osTo1.write(buff, 0, readBytes);
+			}
+		}
+	}
+
+}

@@ -1,0 +1,10 @@
+package com.shpach.filescopy;
+
+import java.io.FilenameFilter;
+
+public class IOUtils {
+	public static void copyFiles(String dirFrom, String dirTo, FilenameFilter fnf){
+		
+	}
+
+}

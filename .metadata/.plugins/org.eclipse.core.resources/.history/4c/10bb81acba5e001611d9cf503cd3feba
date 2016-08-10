@@ -1,0 +1,5 @@
+package com.shpach.filescopy;
+
+public class MyFileFilter {
+
+}

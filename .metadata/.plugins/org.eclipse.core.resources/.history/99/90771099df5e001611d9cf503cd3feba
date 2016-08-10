@@ -1,0 +1,5 @@
+package com.shpach.studgroup;
+
+public interface ClassGroupImportExport {
+
+}

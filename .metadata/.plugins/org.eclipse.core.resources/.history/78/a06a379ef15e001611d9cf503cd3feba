@@ -1,0 +1,18 @@
+package com.shpach.studgroup;
+
+import java.io.IOException;
+import java.io.InputStream;
+import org.omg.CORBA_2_3.portable.OutputStream;
+
+public interface DataImportExport {
+	
+	default void Import(InputStream isFrom, OutputStream osTo) throws IOException {
+		try (InputStream isFrom1 = isFrom; OutputStream osTo1 = osTo) {
+			byte[] buff = new byte[4 * 1024];
+			int readBytes = 0;
+			for (; (readBytes = isFrom1.read(buff)) > 0;) {
+				osTo1.write(buff, 0, readBytes);
+			}
+		}
+	}
+}

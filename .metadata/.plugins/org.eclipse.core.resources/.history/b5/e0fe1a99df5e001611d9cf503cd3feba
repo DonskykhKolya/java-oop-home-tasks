@@ -1,0 +1,19 @@
+package com.shpach.studgroup;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public interface ClassGroupImportExportToFile {
+	ClassGroup group1;
+	default void Export() throws FileNotFoundException, IOException{
+		try(FileOutputStream fos=new FileOutputStream("group.csv")){
+			Class gr= group1.getClass();
+		} 
+		
+	}
+	static void Copy(){
+		
+	}
+
+}

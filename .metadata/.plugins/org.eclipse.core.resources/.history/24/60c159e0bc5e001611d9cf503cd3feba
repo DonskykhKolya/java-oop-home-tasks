@@ -1,0 +1,7 @@
+package com.shpach.filescopy;
+
+import java.io.FilenameFilter;
+
+public class MyFileFilter implements FilenameFilter {
+
+}
