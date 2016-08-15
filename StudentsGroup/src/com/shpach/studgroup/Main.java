@@ -108,7 +108,7 @@ public class Main {
 		ClassGroupImportExportToFile importExport = new ClassGroupImportExportToFile();
 
 		try {
-			importExport.Export(class1);
+			importExport.exportGroup(class1);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -130,7 +130,7 @@ public class Main {
 		// import ClassGroup from File
 
 		try {
-			class1 = importExport.Import();
+			class1 = importExport.importGroup();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

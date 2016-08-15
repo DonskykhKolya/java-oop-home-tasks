@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public  interface DataImportExport {
 	
-	ClassGroup Import() throws IOException, Exception;
-	void Export(ClassGroup group) throws IOException;
+	ClassGroup importGroup() throws IOException, Exception;
+	void exportGroup(ClassGroup group) throws IOException;
 	
 }

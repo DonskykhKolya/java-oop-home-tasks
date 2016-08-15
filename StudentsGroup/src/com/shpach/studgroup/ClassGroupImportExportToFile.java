@@ -25,7 +25,7 @@ public final class ClassGroupImportExportToFile implements DataImportExport {
 	}
  
 	@Override
-	public void Export(ClassGroup group) throws IOException {
+	public void exportGroup(ClassGroup group) throws IOException {
 		try (FileWriter fr = new FileWriter("group.txt")) {
 			SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 			StringBuilder sb = new StringBuilder();
@@ -45,7 +45,7 @@ public final class ClassGroupImportExportToFile implements DataImportExport {
 
 	}
 	@Override
-	public ClassGroup Import() throws IOException, ParseException  {
+	public ClassGroup importGroup() throws IOException, ParseException  {
 		try (BufferedReader fr = new BufferedReader( new FileReader("group.txt"))) {
 			StringBuilder sb = new StringBuilder();
 			String name=(fr.readLine()).replaceAll(";", "");

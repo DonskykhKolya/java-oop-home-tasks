@@ -18,15 +18,15 @@ public class Main {
 		File folderTo = new File("b");
 		if (!folderTo.exists())
 			folderTo.mkdirs();
-		try {
-			IOUtils.copyFiles(folderFrom, folderTo, mFF);
-		} catch (FileNotFoundException e) {
-			System.out.println(e.getMessage());
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		} catch (InputParamNotDirExeption e) {
-			System.out.println(e.getMessage());
-		}
+		
+			//IOUtils.copyFiles(folderFrom, folderTo, mFF);
+			try {
+				MultyThreadCopy mCopy=new MultyThreadCopy(folderFrom, folderTo, mFF);
+			} catch (InputParamNotDirExeption e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		
 		
 		//save similar words in different files
 		try {

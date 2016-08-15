@@ -1,0 +1,25 @@
+import java.util.Scanner;
+
+public class Main {
+	 public static void main(String[] args) {
+		System.out.println("Start directory listner (\"c\" to cancel):");
+		//start thread
+		Scanner sc = new Scanner(System.in); 
+	//	String s=sc.nextLine();
+	//	System.out.println(s);
+		for(;;){
+			//wait for cancel
+		//	if (sc.hasNext()){
+			 s=sc.nextLine();
+			 String can="c";
+				if(s.equals(can)){
+					System.out.println(s);
+					break;
+				}
+			}
+			
+		//}
+		System.out.println("Directory listner stoped");
+	}
+
+}

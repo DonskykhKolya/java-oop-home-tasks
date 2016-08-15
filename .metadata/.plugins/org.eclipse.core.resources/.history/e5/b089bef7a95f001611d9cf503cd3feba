@@ -1,0 +1,10 @@
+package com.shpach.studgroup;
+
+import java.io.IOException;
+
+public  interface DataImportExport {
+	
+	ClassGroup importGroup() throws IOException, Exception;
+	void Export(ClassGroup group) throws IOException;
+	
+}

@@ -1,0 +1,11 @@
+package com.shpach.folderlistner;
+
+public class DirListnerThread implements Runnable {
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

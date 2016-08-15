@@ -1,0 +1,63 @@
+package com.shpach.arraysumm;
+
+import java.util.Random;
+
+public class Main {
+
+	public static void main(String[] args) {
+		int[] array = getRandomArray(2000_000);
+		// singleThread sort
+		long tstart = System.currentTimeMillis();
+		MyThread mt1 = new MyThread(array, 0, array.length - 1);
+		try {
+			mt1.getThr().join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (mt1.isFinish())
+			System.out.println("Array Sum=" + mt1.getSumm());
+		long tend = System.currentTimeMillis();
+		System.out.println((tend - tstart) + " ms" + "- SingleThreadCount");
+		tstart = System.currentTimeMillis();
+		int threadCount=Runtime.getRuntime().availableProcessors();
+		System.out.println("ThreadsCount="+threadCount);
+		MyThread[] mtArray=new MyThread[threadCount];
+		int size = array.length / mtArray.length;
+		for (int i = 0; i < mtArray.length; i++) {
+			int begin = size * i;
+			int end = ((i + 1) * size);
+			if ((array.length - end) < size) {
+				end = array.length;
+			}
+			mtArray[i]= new MyThread(array, begin, end);
+		}
+		for (int i = 0; i < mtArray.length; i++) {
+			try {
+				mtArray[i].getThr().join();
+			} catch (InterruptedException e) {
+				System.out.println(e);
+			}
+		}
+		int summ=0;
+		for (int i = 0; i < mtArray.length; i++) {
+		
+				if(mtArray[i].isFinish()) summ+=mtArray[i].getSumm();
+			
+		}
+		System.out.println("Array Sum=" + mt1.getSumm());
+		tend = System.currentTimeMillis();
+		System.out.println((tend - tstart) + " ms" + "- MultyThreadCount");
+
+	}
+
+	private static int[] getRandomArray(int length) {
+		int[] array = new int[length];
+		Random rn = new Random();
+		for (int i = 0; i < array.length; i++) {
+			array[i] = rn.nextInt(100);
+		}
+		return array;
+	}
+
+}

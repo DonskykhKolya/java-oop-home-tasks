@@ -24,16 +24,7 @@ public class IOUtils {
 				File[] fileList = dirFrom.listFiles(fnf);
 
 				for (File mfile : fileList) {
-					try (FileInputStream fio = new FileInputStream(mfile);
-							FileOutputStream fos = new FileOutputStream(
-									dirTo.getAbsolutePath() + "/" + mfile.getName())) {
-						byte[] buff = new byte[4 * 1024];
-						int readBytes = 0;
-						for (; (readBytes = fio.read(buff)) > 0;) {
-							fos.write(buff, 0, readBytes);
-						}
-
-					}
+					copyFile(mfile, new File(dirTo.getAbsolutePath() + "/" + mfile.getName()));
 				}
 
 			} else {
@@ -41,6 +32,16 @@ public class IOUtils {
 			}
 		} else {
 			throw new IOUtils.InputParamNotDirExeption();
+		}
+	}
+	public static void copyFile(File fileFrom, File fileTo) throws FileNotFoundException, IOException{
+		try (FileInputStream fio = new FileInputStream(fileFrom);
+				FileOutputStream fos = new FileOutputStream(fileTo)) {
+			byte[] buff = new byte[4 * 1024];
+			int readBytes = 0;
+			for (; (readBytes = fio.read(buff)) > 0;) {
+				fos.write(buff, 0, readBytes);
+			}
 		}
 	}
 

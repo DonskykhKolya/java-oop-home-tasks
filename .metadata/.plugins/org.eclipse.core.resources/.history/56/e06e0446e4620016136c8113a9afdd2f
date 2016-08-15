@@ -1,0 +1,33 @@
+package com.shpach.folderlistner;
+
+import java.io.File;
+
+public class DirListnerThread implements Runnable {
+private File dir;
+
+	public DirListnerThread(File dir) {
+	super();
+	this.dir = dir;
+}
+	
+
+	public DirListnerThread() {
+		super();
+	}
+
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		for(;!Thread.currentThread().isInterrupted();){
+			try {
+				Thread.currentThread().sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+}
