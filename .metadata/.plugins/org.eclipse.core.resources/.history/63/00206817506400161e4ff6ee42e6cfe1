@@ -1,0 +1,7 @@
+package com.shpach.shipstoport;
+
+public class Port {
+	private Berth[] berths;
+	
+
+}

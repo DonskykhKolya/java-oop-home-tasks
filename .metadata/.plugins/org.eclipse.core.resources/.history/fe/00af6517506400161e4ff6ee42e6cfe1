@@ -1,0 +1,24 @@
+package com.shpach.shipstoport;
+
+public class Ship {
+	private int containerLoad;
+	private int containerCapasity;
+	public int getContainerLoad() {
+		return containerLoad;
+	}
+	public int getContainerCapasity() {
+		return containerCapasity;
+	}
+	public void loadUnLoadContainer(boolean load){
+		if (load){
+			if(containerLoad<containerCapasity)containerLoad++;
+			else throw new overLoadException();
+		}
+	}
+	public static class overLoadException extends Exception{
+		
+		
+		
+	}
+
+}

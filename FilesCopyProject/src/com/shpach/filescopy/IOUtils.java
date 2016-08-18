@@ -7,6 +7,12 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.channels.SeekableByteChannel;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 public class IOUtils {
 	public static class InputParamNotDirExeption extends Exception {
@@ -34,15 +40,91 @@ public class IOUtils {
 			throw new IOUtils.InputParamNotDirExeption();
 		}
 	}
-	public static void copyFile(File fileFrom, File fileTo) throws FileNotFoundException, IOException{
-		try (FileInputStream fio = new FileInputStream(fileFrom);
-				FileOutputStream fos = new FileOutputStream(fileTo)) {
+
+	public static void copyFile(File fileFrom, File fileTo) throws FileNotFoundException, IOException {
+		try (FileInputStream fio = new FileInputStream(fileFrom); FileOutputStream fos = new FileOutputStream(fileTo)) {
 			byte[] buff = new byte[4 * 1024];
 			int readBytes = 0;
 			for (; (readBytes = fio.read(buff)) > 0;) {
 				fos.write(buff, 0, readBytes);
 			}
 		}
+	}
+
+	public static void copyFileAsync(File fileFrom, File fileTo, long from, long to)
+			throws FileNotFoundException, IOException {
+		Path pr = Paths.get(fileFrom.getName());
+		Path pr2 = Paths.get(fileTo.getName());
+		try (SeekableByteChannel sbc = Files.newByteChannel(pr, StandardOpenOption.READ);
+				SeekableByteChannel sbc2 = Files.newByteChannel(pr2, StandardOpenOption.WRITE)) {
+			ByteBuffer bb;
+			if ((to-from)<1024L) bb = ByteBuffer.allocate((int)(to-from));
+			else bb = ByteBuffer.allocate(1024);
+			long buffLast = (to - from) % bb.capacity();
+			int bufferread = 0;
+			sbc.position(from);
+			sbc2.position(from);
+			for (; (bufferread = sbc.read(bb)) > 0 && sbc.position() <= to;) {
+				bb.rewind();
+				sbc2.write(bb);
+				bb.rewind();
+				if (!((sbc.position() + buffLast) < to)) {
+					bb.limit((int) buffLast);
+				}
+			}
+			System.out.print("#");
+		}
+	}
+
+	public static void MultyTreadFileCopy(File fileFrom, File fileTo) throws FileNotFoundException {
+		if (!fileFrom.exists()) throw new FileNotFoundException();
+		if (!fileTo.exists()) {
+			try {
+				fileTo.createNewFile();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		System.out.println("Starting copy file "+fileFrom.getName());
+		
+	
+		Thread [] thArr=new Thread[10];
+		long step=fileFrom.length()/10L;
+		for (int i = 0; i < 10; i++) {
+			long to=step*i+step-1;
+			long from=step*i;
+			if (i==9) to=fileFrom.length();
+			long to2=to;
+			thArr[i]=new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					try {
+						IOUtils.copyFileAsync(fileFrom, fileTo, from, to2);
+					} catch (FileNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+			});	
+			thArr[i].start();
+		}
+		for (Thread thread : thArr) {
+			try {
+				thread.join();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		System.out.print(System.lineSeparator());
+		System.out.println("Finish");
+		
 	}
 
 	public static void saveSimilarInTextFiles(File file1, File file2, File fileSaveTo)

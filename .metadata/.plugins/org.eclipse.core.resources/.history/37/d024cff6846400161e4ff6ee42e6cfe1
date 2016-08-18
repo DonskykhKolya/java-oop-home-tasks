@@ -1,0 +1,12 @@
+package com.shpach.filescopy;
+
+import java.io.File;
+
+public class MultyTreadFileCopy implements Runnable {
+	private File fileFrom;
+	private File fileTo;
+	
+	
+	
+
+}

@@ -1,0 +1,47 @@
+package com.shpach.filescopy;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+public class MultyTreadFileCopy{
+	
+public void MultyTreadFileCopy1(File fileFrom, File fileTo) throws FileNotFoundException {
+	if (!fileFrom.exists()) throw new FileNotFoundException();
+	if (!fileTo.exists()) {
+		try {
+			fileTo.createNewFile();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
+	long step=fileFrom.length()/10L;
+	for (int i = 0; i < 10; i++) {
+		long to=step*i+step-1;
+		long from=step*i;
+		///if (to>fileFrom.length()) to=fileFrom.length();
+		Thread th=new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				try {
+					IOUtils.copyFileAsync(fileFrom, fileTo, from, to);
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+		});	
+		th.start();
+	}
+	
+}
+	
+	
+	
+
+}

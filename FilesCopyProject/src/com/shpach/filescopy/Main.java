@@ -11,7 +11,29 @@ import com.shpach.filescopy.IOUtils.InputParamNotDirExeption;
 public class Main {
 
 	public static void main(String[] args) {
+		 try {
+			IOUtils.MultyTreadFileCopy(new File("big_file.rtf"), new File("big_file_copy.rtf"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
+		
+		
+		/*
+		 //Create Irregular verbs table
+		File file =new File("1.csv");
+		try {
+			MakeIrregularFile.makeIrregularFileFromCsv(file);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
+		/*
 		//Copy files with filter extention
 		MyFileFilter mFF = new MyFileFilter("doc", "csv");
 		File folderFrom = new File("a");
@@ -37,7 +59,7 @@ public class Main {
 			System.out.println(e);
 		}
 		
-
+*/
 	}
 
 }

@@ -1,0 +1,10 @@
+package com.shpach.shipstoport;
+
+public class Berth {
+	private Ship ship;
+	private Port port;
+	public void beginUnload(){
+		
+	}
+
+}
