@@ -13,6 +13,8 @@ import com.shpach.studgroup.ClassGroup.WrongGradeExeption;
 public class Main {
 
 	public static void main(String[] args) {
+		
+		System.out.println(1%2);
 		ClassGroup class1 = new ClassGroup("java OOP", Student.Grade.year_1);
 		Student st1 = new Student("Ivanov", "Ivan", Human.Sex.mail, new GregorianCalendar(1991, Calendar.MAY, 22),
 				"Kyiv, Lenin str,1", Student.Grade.year_1);
@@ -47,6 +49,27 @@ public class Main {
 		addStudentToClass(class1, st8);
 		addStudentToClass(class1, st9);
 		addStudentToClass(class1, st10);
+		
+		ClassGroup class2 = new ClassGroup("java OOP_2", Student.Grade.year_1);
+		Student st21 = new Student("Ivanov", "Ivan", Human.Sex.mail, new GregorianCalendar(1991, Calendar.MAY, 22),
+				"Kyiv, Lenin str,1", Student.Grade.year_1);
+		Student st22 = new Student("Sidorov", "Vitaly", Human.Sex.mail, new GregorianCalendar(1987, Calendar.MAY, 22),
+				"Kyiv, Lenin str,1", Student.Grade.year_1);
+		Student st23 = new Student("Astahov", "Ivan", Human.Sex.mail, new GregorianCalendar(1992, Calendar.MAY, 30),
+				"Kyiv, Lenin str,1", Student.Grade.year_1);
+		addStudentToClass(class2, st21);
+		addStudentToClass(class2, st22);
+		addStudentToClass(class2, st23);
+		
+		GroupsDataBase groupDB=new GroupsDataBase("GroupDb1");
+		groupDB.addGroup(class1);
+		groupDB.addGroup(class2);
+		System.out.println(groupDB);
+		groupDB.saveDataBaseToFile("groups.db");
+		groupDB=null;
+		groupDB=GroupsDataBase.loadDatabaseFromFile("groups.db");
+		System.out.println(groupDB);
+		
 
 		// Interactive adding student
 		/*
@@ -57,7 +80,7 @@ public class Main {
 		 * System.out.println(e.getMessage()); } catch (WrongGradeExeption e) {
 		 * System.out.println(e.getMessage()); }
 		 */
-
+/*
 		System.out.println(class1);
 		// add 11
 		addStudentToClass(class1, st11);
@@ -140,7 +163,7 @@ public class Main {
 		}
 
 		System.out.println(class1);
-
+*/
 	}
 
 	private static void addStudentToClass(ClassGroup classGroup, Student student) {

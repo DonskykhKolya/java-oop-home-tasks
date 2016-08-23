@@ -1,0 +1,86 @@
+package com.shpach.studgroup;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.Arrays;
+
+public class GroupsDataBase implements Serializable {
+	private String name;
+	private ClassGroup[] groups = new ClassGroup[0];
+
+	public GroupsDataBase(String name) {
+		super();
+		this.name = name;
+	}
+
+	public void addGroup(ClassGroup cg) {
+		if (getGroupIndxByName(cg.getClassName()) < 0) {
+			System.out.println("Class group allready exist");
+		}
+		ClassGroup[] cgNew = new ClassGroup[groups.length + 1];
+		System.arraycopy(groups, 0, cgNew, 0, groups.length);
+		cgNew[cgNew.length] = cg;
+		groups = cgNew;
+	}
+
+	public void deleteGroupByName(String groupName) {
+		int indx = getGroupIndxByName(groupName);
+		try {
+			deleteGroupeByIndx(indx);
+		} catch (IndexOutOfBoundsException ex) {
+			System.out.println("No group with such name");
+		}
+	}
+
+	private int getGroupIndxByName(String groupName) {
+		int res = -1;
+		for (int i = 0; i < groups.length; i++) {
+			if (groups[i].getClassName() == groupName) {
+				res = i;
+				break;
+			}
+
+		}
+		return res;
+	}
+
+	private void deleteGroupeByIndx(int indx) {
+		if (indx < 0 || indx >= groups.length)
+			throw new IndexOutOfBoundsException();
+		this.groups[indx] = null;
+		ClassGroup[] cgNew = new ClassGroup[groups.length - 1];
+		System.arraycopy(groups, 0, cgNew, 0, indx);
+		System.arraycopy(groups, indx + 1, cgNew, indx, groups.length - indx - 1);
+		groups = cgNew;
+	}
+
+	public static GroupsDataBase loadDatabaseFromFile(String filename) {
+		GroupsDataBase gdb = null;
+		try (ObjectInputStream OIS = new ObjectInputStream(new FileInputStream(filename))) {
+			gdb = (GroupsDataBase) OIS.readObject();
+
+		} catch (IOException | ClassNotFoundException e) {
+			System.out.println("ERROR load group !!!");
+		}
+		return gdb;
+
+	}
+
+	public void saveDataBaseToFile(String filename) {
+		try (ObjectOutputStream OOS = new ObjectOutputStream(new FileOutputStream(filename))) {
+			OOS.writeObject(this);
+		} catch (IOException e) {
+			System.out.println("ERROR save group !!!");
+		}
+	}
+
+	@Override
+	public String toString() {
+		return "GroupsDataBase [name=" + name + ", groups=" + Arrays.toString(groups) + "]";
+	}
+
+}

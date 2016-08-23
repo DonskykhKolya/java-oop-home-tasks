@@ -1,9 +1,10 @@
 package com.shpach.studgroup;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class Student extends Human  {
+public class Student extends Human implements Serializable {
 	
 	private String className="";
 	private String adress="";

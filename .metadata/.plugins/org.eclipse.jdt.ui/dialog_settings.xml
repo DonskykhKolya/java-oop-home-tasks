@@ -20,8 +20,8 @@
 		<item value="467" key="DIALOG_WIDTH"/>
 		<item value="1|Tahoma|8.25|0|WINDOWS|1|-11|0|0|0|400|0|0|0|1|0|0|0|0|Tahoma" key="DIALOG_FONT_NAME"/>
 		<item value="598" key="DIALOG_HEIGHT"/>
-		<item value="454" key="DIALOG_X_ORIGIN"/>
-		<item value="4" key="DIALOG_Y_ORIGIN"/>
+		<item value="813" key="DIALOG_X_ORIGIN"/>
+		<item value="64" key="DIALOG_Y_ORIGIN"/>
 	</section>
 	<section name="NewClassWizardPage">
 		<item value="false" key="create_constructor"/>

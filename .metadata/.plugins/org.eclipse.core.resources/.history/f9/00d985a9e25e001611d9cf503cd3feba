@@ -1,5 +1,0 @@
-package com.shpach.studgroup;
-
-public interface DataImportExport {
-
-}

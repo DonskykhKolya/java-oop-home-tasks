@@ -1,9 +1,10 @@
 package com.shpach.studgroup;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class Human implements Comparable<Human>{
+public class Human implements Comparable<Human>, Serializable{
 	private String name;
 	private String surName;
 	private Sex sex;

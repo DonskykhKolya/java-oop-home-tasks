@@ -1,0 +1,93 @@
+package com.shpach.stack;
+
+
+
+public class Stack {
+	private Object[] items = new Object[0];
+	private Class[] blackList = new Class[0];
+
+	public Stack() {
+		super();
+	}
+
+	public void add(Object obj) {
+		if (isInBlackList(obj)){
+			System.out.println("Class "+obj.getClass()+" is in black list");
+			return;
+		}
+		Object[] cgNew = new Object[items.length + 1];
+		System.arraycopy(items, 0, cgNew, 0, items.length);
+		cgNew[items.length] = obj;
+		items = cgNew;
+	}
+
+	public Object deleteLast() {
+		Object res = null;
+		if (items.length != 0) {
+			res = items[items.length - 1];
+			Object[] cgNew = new Object[items.length - 1];
+			System.arraycopy(items, 0, cgNew, 0, cgNew.length);
+			items = cgNew;
+		}
+		return null;
+	}
+
+	public int getLength() {
+		return items.length;
+	}
+
+	public Object getLast() {
+		return items[items.length - 1];
+	}
+
+	public boolean isInBlackList(Object obj) {
+		for (Class class1 : blackList) {
+			if (obj.getClass() == class1)
+				return true;
+		}
+		return false;
+	}
+
+	public void addClassToBlackList(Class class1) {
+		if (!isInBlackList(class1.getConstructors()[0])) {
+			Class[] cgNew = new Class[blackList.length + 1];
+			System.arraycopy(blackList, 0, cgNew, 0, blackList.length);
+			cgNew[blackList.length] = class1;
+			blackList = cgNew;
+		}
+	}
+
+	public void deleteClassFromBlackList(Class class1) {
+		if (isInBlackList(class1.getConstructors()[0])) {
+			int indx = getClassIndxByName(class1);
+			try {
+				deleteClassByIndx(indx);
+			} catch (IndexOutOfBoundsException ex) {
+				System.out.println("No Class with such name");
+			}
+		}
+	}
+
+	private int getClassIndxByName(Class class1) {
+		int res = -1;
+		for (int i = 0; i < blackList.length; i++) {
+			if (blackList[i] == class1) {
+				res = i;
+				break;
+			}
+
+		}
+		return res;
+	}
+
+	private void deleteClassByIndx(int indx) {
+		if (indx < 0 || indx >= blackList.length)
+			throw new IndexOutOfBoundsException();
+		this.blackList[indx] = null;
+		Class[] cgNew = new Class[blackList.length - 1];
+		System.arraycopy(blackList, 0, cgNew, 0, indx);
+		System.arraycopy(blackList, indx + 1, cgNew, indx, blackList.length - indx - 1);
+		blackList = cgNew;
+	}
+
+}

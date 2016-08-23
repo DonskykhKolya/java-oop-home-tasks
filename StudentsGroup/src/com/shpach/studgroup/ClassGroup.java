@@ -1,5 +1,6 @@
 package com.shpach.studgroup;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -11,7 +12,7 @@ import javax.swing.JOptionPane;
 
 import com.shpach.studgroup.Student.Grade;
 
-public class ClassGroup implements VoenKom{
+public class ClassGroup implements VoenKom, Serializable{
 	private String className = "";
 	private Student.Grade grade;
 	private Student[] students = new Student[0];
